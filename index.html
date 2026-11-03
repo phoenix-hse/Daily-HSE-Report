@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Project | Daily HSE Report</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,sans-serif;
+  background:#f1f5f9;color:#172b40;
+}
+header{
+  background:#173653;color:white;padding:25px 5%;
+}
+header h1{margin:0;font-size:24px}
+header p{margin:7px 0 0;color:#c5d6e5}
+.container{max-width:950px;margin:28px auto;padding:0 16px}
+.card{
+  background:white;border-radius:12px;padding:24px;
+  margin-bottom:20px;box-shadow:0 2px 10px #0000000b;
+}
+h2{font-size:18px;margin:0 0 20px;color:#173653}
+.grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.field{margin-bottom:16px}
+label{display:block;font-weight:bold;font-size:13px;margin-bottom:7px}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #cbd5e1;
+  border-radius:7px;font-size:14px;background:white;
+}
+textarea{min-height:95px;resize:vertical}
+.full{grid-column:1/-1}
+button{
+  border:0;border-radius:7px;padding:14px 22px;
+  background:#16834a;color:white;font-weight:bold;
+  font-size:15px;cursor:pointer;
+}
+button:hover{background:#11683a}
+.secondary{background:#173653}
+#result{
+  display:none;background:#e9f7ef;padding:18px;
+  border-radius:8px;margin-top:18px;line-height:1.6;
+}
+footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .card{padding:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>PHOENIX PROJECT</h1>
+  <p>DAILY HSE SUPERVISOR REPORTING SYSTEM</p>
+</header>
+
+<main class="container">
+
+<form id="reportForm">
+
+<div class="card">
+<h2>01 | Supervisor Information</h2>
+<div class="grid">
+
+<div class="field">
+<label>Report Date *</label>
+<input type="date" id="date" required>
+</div>
+
+<div class="field">
+<label>Supervisor Name *</label>
+<input type="text" id="name" placeholder="Enter full name" required>
+</div>
+
+<div class="field">
+<label>Shift *</label>
+<select id="shift" required>
+<option value="">Select Shift</option>
+<option>Day Shift</option>
+<option>Night Shift</option>
+</select>
+</div>
+
+<div class="field">
+<label>Work Area *</label>
+<input type="text" id="area" placeholder="e.g. Tank Farm / Piperack" required>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>02 | Manpower Monitoring</h2>
+<div class="grid">
+
+<div class="field">
+<label>Total Manpower</label>
+<input type="number" id="manpower" min="0" placeholder="0">
+</div>
+
+<div class="field">
+<label>Number of Subcontractors</label>
+<input type="number" id="subcontractors" min="0" placeholder="0">
+</div>
+
+<div class="field full">
+<label>Manpower / Contractor Details</label>
+<textarea id="manpowerDetails" placeholder="List contractor names and manpower details..."></textarea>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>03 | Work Activities Monitoring</h2>
+<div class="field">
+<label>Work Activities Monitored</label>
+<textarea id="activities" placeholder="Describe ongoing work activities, locations and contractors..."></textarea>
+</div>
+<div class="field">
+<label>HSE Monitoring / Supervision Details</label>
+<textarea id="monitoring" placeholder="Describe your monitoring and supervision activities..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>04 | HSE Inspection & Findings</h2>
+<div class="grid">
+<div class="field">
+<label>Number of Inspections</label>
+<input type="number" id="inspections" min="0" placeholder="0">
+</div>
+<div class="field">
+<label>Unsafe Acts (UA)</label>
+<input type="number" id="ua" min="0" placeholder="0">
+</div>
+<div class="field">
+<label>Unsafe Conditions (UC)</label>
+<input type="number" id="uc" min="0" placeholder="0">
+</div>
+<div class="field">
+<label>Safe Acts / Conditions</label>
+<input type="number" id="safe" min="0" placeholder="0">
+</div>
+<div class="field full">
+<label>Inspection Findings</label>
+<textarea id="findings" placeholder="Describe observations and findings..."></textarea>
+</div>
+<div class="field full">
+<label>Immediate Corrective Actions Taken</label>
+<textarea id="actions" placeholder="Describe actions taken to rectify the findings..."></textarea>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>05 | HSE Intervention & Engagement</h2>
+<div class="field">
+<label>Toolbox Talk / Safety Briefing / HSE Sharing</label>
+<textarea id="toolbox" placeholder="Describe sessions conducted and number of participants..."></textarea>
+</div>
+<div class="field">
+<label>Safety Intervention / Stop Work</label>
+<textarea id="intervention" placeholder="Describe safety interventions and follow-up..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>06 | PTW & Equipment Monitoring</h2>
+<div class="field">
+<label>PTW Verification / Monitoring</label>
+<textarea id="ptw" placeholder="Permit number, work scope, validity and verification..."></textarea>
+</div>
+<div class="field">
+<label>Equipment / Lifting Operation Monitoring</label>
+<textarea id="equipment" placeholder="Crane, lifting gears, electrical tools and equipment status..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>07 | Issues & Follow-up Actions</h2>
+<div class="field">
+<label>Outstanding Issues / HSE Concerns</label>
+<textarea id="issues" placeholder="Describe pending issues requiring further attention..."></textarea>
+</div>
+<div class="field">
+<label>Recommended Follow-up / Action Required</label>
+<textarea id="followup" placeholder="Action required, responsible party and target date..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>08 | Photo Evidence</h2>
+<div class="field">
+<label>Upload Site Photographs</label>
+<input type="file" id="photos" accept="image/*" multiple>
+</div>
+<p style="font-size:12px;color:#64748b">
+Photo upload will be connected to the project database in the next development stage.
+</p>
+</div>
+
+<div class="card">
+<button type="submit">SUBMIT DAILY REPORT</button>
+<button type="reset" class="secondary" style="margin-left:8px">RESET FORM</button>
+
+<div id="result"></div>
+</div>
+
+</form>
+</main>
+
+<footer>
+Phoenix Project | HSE Department | Daily Reporting System
+</footer>
+
+<script>
+document.getElementById("date").value =
+  new Date().toISOString().slice(0,10);
+
+document.getElementById("reportForm").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const name=document.getElementById("name").value;
+  const date=document.getElementById("date").value;
+  const area=document.getElementById("area").value;
+  const shift=document.getElementById("shift").value;
+
+  const result=document.getElementById("result");
+  result.style.display="block";
+  result.innerHTML=
+    "<h3>Report Form Completed!</h3>"+
+    "<b>Supervisor:</b> "+escapeHTML(name)+"<br>"+
+    "<b>Date:</b> "+escapeHTML(date)+"<br>"+
+    "<b>Shift:</b> "+escapeHTML(shift)+"<br>"+
+    "<b>Area:</b> "+escapeHTML(area)+"<br><br>"+
+    "This is a front-end prototype. Database submission and photo storage will be enabled in the next stage.";
+
+  result.scrollIntoView({behavior:"smooth"});
+});
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+</script>
+
+</body>
+</html>
